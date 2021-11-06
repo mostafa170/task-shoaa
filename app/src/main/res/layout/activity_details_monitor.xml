@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".DetailsMonitorActivity">
+
+        <TextView
+            android:id="@+id/id_name_shipment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
+            android:drawableEnd="@drawable/ic_icon_name"
+            android:drawablePadding="5dp"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="1"
+            android:text="@string/label_name_shipment"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_name_shipment_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/id_name_shipment"
+            app:layout_constraintEnd_toStartOf="@+id/id_name_shipment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/id_name_shipment" />
+
+        <TextView
+            android:id="@+id/id_date_shipment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawableEnd="@drawable/ic_date"
+            android:drawablePadding="5dp"
+            android:text="@string/st_detail_trip"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/id_name_shipment"
+            app:layout_constraintTop_toBottomOf="@+id/id_name_shipment" />
+
+        <TextView
+            android:id="@+id/tv_date_shipment_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/id_date_shipment"
+            app:layout_constraintEnd_toEndOf="@+id/tv_name_shipment_txt"
+            app:layout_constraintTop_toTopOf="@+id/id_date_shipment" />
+
+        <TextView
+            android:id="@+id/id_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="1"
+            android:drawableEnd="@drawable/ic_address"
+            android:drawablePadding="5dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/id_name_shipment"
+            app:layout_constraintTop_toBottomOf="@+id/id_date_shipment" />
+
+
+        <TextView
+            android:id="@+id/id_notes_shipment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawableEnd="@drawable/ic_board"
+            android:drawablePadding="5dp"
+            android:text="@string/st_notes"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/id_name_shipment"
+            app:layout_constraintTop_toBottomOf="@+id/id_address" />
+
+        <TextView
+            android:id="@+id/tv_notes_shipment_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/id_notes_shipment"
+            app:layout_constraintEnd_toEndOf="@+id/tv_name_shipment_txt"
+            app:layout_constraintTop_toTopOf="@+id/id_notes_shipment" />
+
+        <View
+            android:id="@+id/id_view"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/id_notes_shipment" />
+
+        <TextView
+            android:id="@+id/id_monitor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawableEnd="@drawable/ic_icon_name"
+            android:drawablePadding="5dp"
+            android:text="@string/labal_personal_data_phone"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/id_name_shipment"
+            app:layout_constraintTop_toBottomOf="@+id/id_view" />
+
+        <TextView
+            android:id="@+id/tv_monitor_name_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/id_monitor_name"
+            app:layout_constraintEnd_toEndOf="@+id/tv_name_shipment_txt"
+            app:layout_constraintTop_toTopOf="@+id/id_monitor_name" />
+
+        <TextView
+            android:id="@+id/id_monitor_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawableEnd="@drawable/ic_icon_name"
+            android:drawablePadding="5dp"
+            android:text="@string/labal_monitor_position"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/id_name_shipment"
+            app:layout_constraintTop_toBottomOf="@+id/id_monitor_name" />
+
+        <TextView
+            android:id="@+id/tv_monitor_position_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/id_monitor_position"
+            app:layout_constraintEnd_toEndOf="@+id/tv_name_shipment_txt"
+            app:layout_constraintTop_toTopOf="@+id/id_monitor_position" />
+
+        <View
+            android:id="@+id/id_view1"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/id_monitor_position" />
+
+
+        <TextView
+            android:id="@+id/id_images"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="@string/label_images"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/id_view1" />
+
+        <ImageView
+            android:id="@+id/image1"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_profile_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image2"
+            app:layout_constraintTop_toBottomOf="@+id/id_images" />
+        <ImageView
+            android:id="@+id/image2"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_profile_image"
+            app:layout_constraintEnd_toStartOf="@+id/image1"
+            app:layout_constraintStart_toEndOf="@+id/image3"
+            app:layout_constraintTop_toBottomOf="@+id/id_images" />
+        <ImageView
+            android:id="@+id/image3"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_profile_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/image2"
+            app:layout_constraintTop_toBottomOf="@+id/id_images" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
