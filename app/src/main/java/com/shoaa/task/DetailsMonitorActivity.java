@@ -2,14 +2,17 @@ package com.shoaa.task;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -26,15 +29,23 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.shoaa.task.databinding.ActivityDetailsMonitorBinding;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 public class DetailsMonitorActivity extends AppCompatActivity {
     ActivityDetailsMonitorBinding binding;
+    OutputStream outputStream;
+    private static int REQUEST_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +107,7 @@ public class DetailsMonitorActivity extends AppCompatActivity {
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         Button shareBtn = dialog.findViewById(R.id.shareBtn);
         Button savaBtn = dialog.findViewById(R.id.saveBtn);
+        ImageView imageExit = dialog.findViewById(R.id.iv_exit);
         ImageView imageEl3adad = dialog.findViewById(R.id.image_el3dad);
         shareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,46 +138,88 @@ public class DetailsMonitorActivity extends AppCompatActivity {
 
             }
         });
-        ActivityCompat.requestPermissions(DetailsMonitorActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-        ActivityCompat.requestPermissions(DetailsMonitorActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+        ActivityCompat.requestPermissions(DetailsMonitorActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        ActivityCompat.requestPermissions(DetailsMonitorActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         savaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveToGallery(imageEl3adad);
+                if (ContextCompat.checkSelfPermission(DetailsMonitorActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+
+                    saveImage(imageEl3adad);
+
+                } else {
+
+
+                    askPermission();
+
+                }
             }
         });
         byte[] decodedString = Base64.decode(images, Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         imageEl3adad.setImageBitmap(decodedByte);
+        imageExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
         dialog.show();
     }
 
-    private void saveToGallery(ImageView imageEl3adad){
-        BitmapDrawable bitmapDrawable = (BitmapDrawable) imageEl3adad.getDrawable();
-        Bitmap bitmap = bitmapDrawable.getBitmap();
+    private void askPermission() {
 
-        FileOutputStream outputStream = null;
-        File file = Environment.getExternalStorageDirectory();
-        File dir = new File(file.getAbsolutePath() + "/MyPics");
-        dir.mkdirs();
+        ActivityCompat.requestPermissions(DetailsMonitorActivity.this
+                , new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE);
 
-        String filename = String.format("%d.png",System.currentTimeMillis());
-        File outFile = new File(dir,filename);
-        try{
-            outputStream = new FileOutputStream(outFile);
-        }catch (Exception e){
+    }
+
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions
+//            , @NonNull @NotNull int[] grantResults) {
+//
+//        if (requestCode == REQUEST_CODE)
+//        {
+//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+//                saveImage();
+//
+//            }else {
+//                Toast.makeText(DetailsMonitorActivity.this
+//                        ,"Please provide the required permissions",Toast.LENGTH_SHORT).show();
+//            }
+//
+//        }
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//    }
+
+    private void saveImage(ImageView bird) {
+
+        File dir = new File(Environment.getExternalStorageDirectory(), "SaveImage");
+
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+
+        BitmapDrawable drawable = (BitmapDrawable) bird.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+
+        File file = new File(dir, System.currentTimeMillis() + ".jpg");
+        try {
+            outputStream = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        bitmap.compress(Bitmap.CompressFormat.PNG,100,outputStream);
-        try{
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+        Toast.makeText(DetailsMonitorActivity.this, "Successfuly Saved", Toast.LENGTH_SHORT).show();
+
+        try {
             outputStream.flush();
-        }catch (Exception e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        try{
+        try {
             outputStream.close();
-        }
-        catch (Exception e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
